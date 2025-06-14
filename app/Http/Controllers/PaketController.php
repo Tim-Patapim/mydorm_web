@@ -146,9 +146,9 @@ class PaketController extends Controller
         $gedungId = 1;
 
         // Validasi input nomor kamar
-        // if (!$nomorKamar) {
-        //     return redirect()->back()->with('error', 'Nomor kamar harus diisi.');
-        // }
+        if (!$nomorKamar) {
+            return redirect()->back()->with('error', 'Nomor kamar harus diisi.');
+        }
 
         try {
             // Query untuk mendapatkan kamar berdasarkan nomor kamar dan gedung_id
