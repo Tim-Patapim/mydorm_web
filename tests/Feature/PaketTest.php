@@ -18,7 +18,7 @@ class PaketTest extends TestCase
     /**
      * A basic feature test example.
      */
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_search_dormitizen_found()
     {
         $paket = new PaketController;
@@ -34,7 +34,8 @@ class PaketTest extends TestCase
         $this->assertTrue(session()->has('dormitizens'));
         $this->assertEquals('101', session('nomorKamar'));
     }
-    /** @test */
+
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_search_dormitizen_missing_room_number()
     {
         $controller = new PaketController;
@@ -48,7 +49,7 @@ class PaketTest extends TestCase
         $this->assertEquals('Nomor kamar harus diisi.', session('error'));
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_search_dormitizen_room_not_found()
     {
         $controller = new PaketController;
