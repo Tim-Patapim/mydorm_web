@@ -62,7 +62,7 @@ return [
     'providers' => [
         'helpdesks' => [
             'driver' => 'eloquent',
-            'model' => App\models\Helpdesk::class
+            'model' => App\Models\Helpdesk::class
         ],
 
         // 'users' => [
