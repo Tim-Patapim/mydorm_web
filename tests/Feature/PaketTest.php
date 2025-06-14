@@ -34,4 +34,34 @@ class PaketTest extends TestCase
         $this->assertTrue(session()->has('dormitizens'));
         $this->assertEquals('101', session('nomorKamar'));
     }
+    /** @test */
+    public function test_search_dormitizen_missing_room_number()
+    {
+        $controller = new PaketController;
+        $request = new Request();
+
+        // Tidak ada input nomor_kamar
+        $response = $controller->searchDormitizen($request);
+
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertTrue(session()->has('error'));
+        $this->assertEquals('Nomor kamar harus diisi.', session('error'));
+    }
+
+    /** @test */
+    public function test_search_dormitizen_room_not_found()
+    {
+        $controller = new PaketController;
+        $request = new Request();
+
+        $request->merge([
+            'nomor_kamar' => '911' // Nomor kamar yang tidak ada di database
+        ]);
+
+        $response = $controller->searchDormitizen($request);
+
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertTrue(session()->has('error'));
+        $this->assertEquals('Kamar tidak ditemukan.', session('error'));
+    }
 }
